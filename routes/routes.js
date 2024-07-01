@@ -1,9 +1,13 @@
 import { Router } from "express";
-import userRoutes from "./userRoutes.js";
+import SondaRoutes from "./sondaRoutes.js";
 
-const routes = Router();
+const router = Router();
 
 
-routes.use("/user", logger, userRoutes);
+router.use("/user", SondaRoutes);
 
-export default routes;
+router.get('/', (req, res) => {
+    res.send("Bienvenido")
+  });
+
+export default router;
