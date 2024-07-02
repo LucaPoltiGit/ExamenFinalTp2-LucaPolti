@@ -11,28 +11,30 @@ class SondaController {
       
       res.status(200).json({status: "success", payload: sonda});
     } catch (error) {
-      res.status(500).json({ status: "Error", msg: "datos no válidos" });
+      res.status(400).json({ status: "Error", msg: "datos no válidos" });
     }
   }
 
   getAllSondas = async (req, res) => {
     try {
       const sondas = await sondaS.getAllSondasService();
+      if(sondas.length == 0) throw error
       res.status(200).json({status: "success", payload: sondas});
     }catch (error) {
-      res.status(500).json({ status: "Error", msg: "datos no válidos" });
+      res.status(400).json({ status: "Error", msg: "no hay sondas" });
       console.log(error.message);
     }
   };
 
   getSondaById = async (req, res) => {
-    const { id } = req.params;
-    const sonda = await sondaS.getSondaByIdService(id);
+    
     try{
-        if(!sonda) throw error
-        res.status(200).json({status: "success", payload: sonda});
+      const { id } = req.params;
+      const sonda = await sondaS.getSondaByIdService(id);
+      if(!sonda) throw error
+      res.status(200).json({status: "success", payload: sonda});
     } catch(error) {
-        res.status(404).json({ status: "Error", message: 'Número de sonda incorrecto' });
+        res.status(400).json({ status: "Error", message: 'Número de sonda incorrecto' });
     }
 };
 }
