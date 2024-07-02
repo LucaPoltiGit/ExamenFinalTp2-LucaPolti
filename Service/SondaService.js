@@ -4,7 +4,6 @@ import { tempValida, idValida } from '../utils/utils.js';
 class SondaService {
   createSondaService = async (id,temp) =>{
     try{
-      console.log(id, temp)
       const validateTemp = tempValida(temp);
    
       const validateId = idValida(id);
@@ -22,6 +21,7 @@ class SondaService {
   };
 
   getAllSondasService = async () => {
+    
     const sondas = await Sonda.findAll();
     return sondas;
   };

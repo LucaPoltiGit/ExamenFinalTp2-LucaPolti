@@ -8,7 +8,7 @@ class SondaController {
     const {id, temperatura} = req.body;
     try {
       const sonda = await sondaS.createSondaService(id, temperatura);
-      console.log(sonda)
+      
       res.status(200).json({status: "success", payload: sonda});
     } catch (error) {
       res.status(500).json({ status: "Error", msg: "datos no válidos" });
@@ -17,7 +17,7 @@ class SondaController {
 
   getAllSondas = async (req, res) => {
     try {
-      const sondas = await SondaService.getAllSondasService();
+      const sondas = await sondaS.getAllSondasService();
       res.status(200).json({status: "success", payload: sondas});
     }catch (error) {
       res.status(500).json({ status: "Error", msg: "datos no válidos" });
@@ -27,8 +27,9 @@ class SondaController {
 
   getSondaById = async (req, res) => {
     const { id } = req.params;
-    const sonda = await SondaService.getSondaByIdService(id);
+    const sonda = await sondaS.getSondaByIdService(id);
     try{
+        if(!sonda) throw error
         res.status(200).json({status: "success", payload: sonda});
     } catch(error) {
         res.status(404).json({ status: "Error", message: 'Número de sonda incorrecto' });
