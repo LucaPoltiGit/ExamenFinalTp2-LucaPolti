@@ -4,7 +4,7 @@ import dbConnection from "../dbConnection/dbConnection.js";
 
 class Sonda extends Model {}
 
-User.init(
+Sonda.init(
   {
     temperatura:{
       type: DataTypes.INTEGER,
@@ -19,7 +19,6 @@ User.init(
       allowNull: false, 
       defaultValue: DataTypes.NOW,
     },
-    
   },  
   {
     sequelize: dbConnection,

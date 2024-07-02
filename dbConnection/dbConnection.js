@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import {
+/*import {
   DB_NAME,
   DB_USER,
   DB_PASSWORD,
@@ -9,10 +9,15 @@ import {
 } from "../config/config.js";
 const dbConnection = new Sequelize(DB_NAME, DB_USER,DB_PASSWORD, {
   host:  DB_HOST,
-  dialect: DB_DIALECT,
+  dialect: 'DB_DIALECT',
   port:  DB_PORT,
-});
+});*/
 
+const dbConnection = new Sequelize("SondaDB", "root", "", {
+  host:  "localhost",
+  dialect: 'mysql',
+  port:  3306,
+});
 try {
   await dbConnection.authenticate();
   console.log("Connection has been established successfully.");

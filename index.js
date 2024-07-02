@@ -1,5 +1,6 @@
 import express from "express";
 import routes from "./routes/routes.js";
+import dbConnection from "./dbConnection/dbConnection.js";
 import {SERVER_PORT} from "./config/config.js"
 
 
@@ -10,16 +11,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('api',routes);
+app.use(routes);
 
 app.use((req, res, next) => {
   res.status(404).send({ success: false, message: "not found" });
 });
 
 
+await dbConnection.sync({force:true})
 
-/*await dbConnection.sync({force:true})*/
-
-app.listen(SERVER_PORT, () => {
+app.listen(8080, () => {
   console.log("Puerto 8080 ok");
 });

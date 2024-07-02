@@ -4,7 +4,7 @@ import SondaRoutes from "./sondaRoutes.js";
 const router = Router();
 
 
-router.use("/user", SondaRoutes);
+router.use("/sonda", SondaRoutes);
 
 router.get('/', (req, res) => {
     res.send("Bienvenido")
